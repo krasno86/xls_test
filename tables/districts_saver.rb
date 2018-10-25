@@ -34,7 +34,7 @@ def save_districts_to_db(district_hash)
                   #{district_hash[:ll_scrape_dev_name]},
                   #{district_hash[:academic_year]});")
     p "-" * 150
-    p "SAVED_SCHOOLS"
+    p "SAVED_DISTRICTS"
     p "=" * 150
   rescue Exception => e
     p "############################EXCEPTION_SQL_SAVE_EMPLOYEE#########################"
