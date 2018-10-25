@@ -1,7 +1,7 @@
 require_relative 'tables/districts_saver'
 
 
-def create_district_hash(file_name)
+def create_district_hash(file_name, year, data_source_url, source_as_google_spreadsheet_url)
   index = 0
   CSV.foreach("/home/krasno_o/work/xls_test/#{file_name}") do |row|
     if index > 2
@@ -47,10 +47,10 @@ def create_district_hash(file_name)
           'enrollments': enrollments,
           'absent_21_days_or_over': absent_21_days_or_over,
           'percent_absent_21_or_more_days': percent_absent_21_or_more_days,
-          'data_source_url': "'http://www.fldoe.org/core/fileparse.php/7584/urlt/1516ABS21DAYSchool.xls'",
-          'source_as_google_spreadsheet_url': "'https://drive.google.com/open?id=1GOUnb9rtWYxnMjHwsixOXf5pZTub_5cvzMLBLMz9wMA'",
+          'data_source_url': data_source_url,
+          'source_as_google_spreadsheet_url': source_as_google_spreadsheet_url,
           'll_scrape_dev_name': "'Krasno Oleg'",
-          'academic_year': "'2015-16'"
+          'academic_year': year
       }
       save_districts_to_db(district_hash)
     end

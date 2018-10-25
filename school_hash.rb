@@ -1,7 +1,7 @@
 require_relative 'tables/schools_saver'
 
 
-def create_school_hash(file_name)
+def create_school_hash(file_name, year, data_source_url, source_as_google_spreadsheet_url)
   index = 0
   CSV.foreach("/home/krasno_o/work/xls_test/#{file_name}") do |row|
     if index > 2
