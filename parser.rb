@@ -20,14 +20,12 @@ require 'date'
 #   p row
 # end
 
-# old_names_arr = Dir["xls_files/*"]
-#
-# old_names_arr.each do |old_file_name|
-#   new_file_name = "#{old_file_name.gsub("xls_files/", "").gsub(".xls", "")}.csv"
-#
-#   %x( ssconvert ~/work/xls_test/xls_files/#{old_file_name} #{new_file_name})
-#   ssconvert ~/work/xls_test/xls_files/#{old_file_name} ~/work/xls_test/csv_files/#{new_file_name})
-# end
+old_names_arr = Dir["xls_files/*"]
+
+old_names_arr.each do |old_file_name|
+  new_file_name = "#{old_file_name.gsub("xls_files/", "").gsub(".xls", "")}.csv"
+  %x(ssconvert ~/work/xls_test/#{old_file_name} ~/work/xls_test/csv_files/#{new_file_name})
+end
 
 csv_files_names = Dir["csv_files/*"]
 
