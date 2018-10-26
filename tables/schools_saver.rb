@@ -1,7 +1,6 @@
 require 'mysql2'
 
 def save_schools_to_db(schools_hash)
-  p '33333333333333333333333333333333333'
   client = ''
 
   loop do
@@ -23,8 +22,6 @@ def save_schools_to_db(schools_hash)
                                     enrollments,
                                     absent_21_days_or_over,
                                     percent_absent_21_or_more_days,
-                                    created_at,
-                                    updated_at,
                                     data_source_url,
                                     source_as_google_spreadsheet_url,
                                     ll_scrape_dev_name,
@@ -36,9 +33,6 @@ def save_schools_to_db(schools_hash)
                   #{schools_hash[:enrollments]},
                   #{schools_hash[:absent_21_days_or_over]},
                   #{schools_hash[:percent_absent_21_or_more_days]},
-
-                  #{schools_hash[:created_at]},
-                  #{schools_hash[:updated_at]},
                   #{schools_hash[:data_source_url]},
                   #{schools_hash[:source_as_google_spreadsheet_url]},
                   #{schools_hash[:ll_scrape_dev_name]},
@@ -47,7 +41,7 @@ def save_schools_to_db(schools_hash)
     p "SAVED_SCHOOLS"
     p "=" * 150
   rescue Exception => e
-    p "############################EXCEPTION_SQL_SAVE_EMPLOYEE#########################"
+    p "############################EXCEPTION_SQL_SAVE_SCHOOL#########################"
     p e
     p schools_hash
   end
