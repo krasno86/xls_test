@@ -37,7 +37,7 @@ def save_districts_to_db(district_hash)
     p "SAVED_DISTRICTS"
     p "=" * 150
   rescue Exception => e
-    p "############################EXCEPTION_SQL_SAVE_EMPLOYEE#########################"
+    p "############################EXCEPTION_SQL_SAVE_DISTRICT#########################"
     p e
     p district_hash
   end

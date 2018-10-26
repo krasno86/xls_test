@@ -1,6 +1,5 @@
 require_relative 'tables/schools_saver'
 
-
 def create_school_hash(file_name, year, data_source_url, source_as_google_spreadsheet_url)
   index = 0
   CSV.foreach("/home/krasno_o/work/xls_test/#{file_name}") do |row|
@@ -20,7 +19,7 @@ def create_school_hash(file_name, year, data_source_url, source_as_google_spread
       end
 
       begin
-        school_number = row[2]
+        school_number = "'#{row[2].gsub("'", "\\\\'")}'"
         school_number = "NULL" unless school_number.count("a-zA-Z1234567890") > 0
       rescue Exception => e
         school_number = "NULL"
@@ -62,10 +61,10 @@ def create_school_hash(file_name, year, data_source_url, source_as_google_spread
           'enrollments': enrollments,
           'absent_21_days_or_over': absent_21_days_or_over,
           'percent_absent_21_or_more_days': percent_absent_21_or_more_days,
-          'data_source_url': "'http://www.fldoe.org/core/fileparse.php/7584/urlt/1516ABS21DAYSchool.xls'",
-          'source_as_google_spreadsheet_url': "'https://drive.google.com/open?id=1GOUnb9rtWYxnMjHwsixOXf5pZTub_5cvzMLBLMz9wMA'",
+          'data_source_url': data_source_url,
+          'source_as_google_spreadsheet_url': source_as_google_spreadsheet_url,
           'll_scrape_dev_name': "'Krasno Oleg'",
-          'academic_year': "'2015-16'"
+          'academic_year': year
       }
       save_schools_to_db(schools_hash)
     end

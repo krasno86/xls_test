@@ -41,7 +41,7 @@ def save_schools_to_db(schools_hash)
     p "SAVED_SCHOOLS"
     p "=" * 150
   rescue Exception => e
-    p "############################EXCEPTION_SQL_SAVE_EMPLOYEE#########################"
+    p "############################EXCEPTION_SQL_SAVE_SCHOOL#########################"
     p e
     p schools_hash
   end
