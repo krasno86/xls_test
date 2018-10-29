@@ -42,7 +42,6 @@ def create_district_hash(file_name, year, data_source_url, source_as_google_spre
 
       begin
         percent_present = row[5].gsub(",", ".").to_f
-        persent_present = "NULL" unless percent_present.count("a-zA-Z1234567890") > 0
       rescue Exception => e
         percent_present = "NULL"
       end

@@ -23,6 +23,7 @@ def save_districts_to_db(district_hash)
                                     percent_present,
                                     average_daily_attendance,
                                     average_daily_membership,
+                                    data_source_url,
                                     source_as_google_spreadsheet_url,
                                     ll_scrape_dev_name,
                                     academic_year)
@@ -34,6 +35,7 @@ def save_districts_to_db(district_hash)
                   #{district_hash[:percent_present]},
                   #{district_hash[:average_daily_attendance]},
                   #{district_hash[:average_daily_membership]},
+                  #{district_hash[:data_source_url]},
                   #{district_hash[:source_as_google_spreadsheet_url]},
                   #{district_hash[:ll_scrape_dev_name]},
                   #{district_hash[:academic_year]});")
