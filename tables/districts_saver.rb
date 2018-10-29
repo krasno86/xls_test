@@ -14,22 +14,26 @@ def save_districts_to_db(district_hash)
   end
 
   begin
-    client.query("INSERT INTO oleg_krasno_florida_edu_district_absent_21_plus_days (
+    client.query("INSERT INTO oleg_krasno_florida_edu_average_daily_attendance_by_district (
                                     district_number,
                                     district_name,
-                                    enrollments,
-                                    absent_21_days_or_over,
-                                    percent_absent_21_or_more_days,
-                                    data_source_url,
+                                    days_present,
+                                    days_absent,
+                                    total,
+                                    percent_present,
+                                    average_daily_attendance,
+                                    average_daily_membership,
                                     source_as_google_spreadsheet_url,
                                     ll_scrape_dev_name,
                                     academic_year)
           VALUES (#{district_hash[:district_number]},
                   #{district_hash[:district_name]},
-                  #{district_hash[:enrollments]},
-                  #{district_hash[:absent_21_days_or_over]},
-                  #{district_hash[:percent_absent_21_or_more_days]},
-                  #{district_hash[:data_source_url]},
+                  #{district_hash[:days_present]},
+                  #{district_hash[:days_absent]},
+                  #{district_hash[:total]},
+                  #{district_hash[:percent_present]},
+                  #{district_hash[:average_daily_attendance]},
+                  #{district_hash[:average_daily_membership]},
                   #{district_hash[:source_as_google_spreadsheet_url]},
                   #{district_hash[:ll_scrape_dev_name]},
                   #{district_hash[:academic_year]});")

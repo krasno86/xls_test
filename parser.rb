@@ -29,7 +29,7 @@ require 'date'
 csv_files_names = Dir["csv_files/*"]
 
 csv_files_names.each do |file_name|
-  if file_name.include?('District') || file_name.include?('district')
+  if file_name.include?('District') || file_name.include?('Dist')
     get_district_params(file_name)
   else
     get_school_params(file_name)
