@@ -14,14 +14,17 @@ def save_schools_to_db(schools_hash)
   end
 
   begin
-    client.query("INSERT INTO oleg_krasno_florida_edu_school_absent_21_plus_days (
+    client.query("INSERT INTO oleg_krasno_florida_edu_average_daily_by_school (
                                     district_number,
                                     district_name,
                                     school_number,
                                     school_name,
-                                    enrollments,
-                                    absent_21_days_or_over,
-                                    percent_absent_21_or_more_days,
+                                    days_present,
+                                    days_absent,
+                                    total,
+                                    percent_present,
+                                    average_daily_attendance,
+                                    average_daily_membership,
                                     data_source_url,
                                     source_as_google_spreadsheet_url,
                                     ll_scrape_dev_name,
@@ -30,9 +33,12 @@ def save_schools_to_db(schools_hash)
                   #{schools_hash[:district_name]},
                   #{schools_hash[:school_number]},
                   #{schools_hash[:school_name]},
-                  #{schools_hash[:enrollments]},
-                  #{schools_hash[:absent_21_days_or_over]},
-                  #{schools_hash[:percent_absent_21_or_more_days]},
+                  #{schools_hash[:days_present]},
+                  #{schools_hash[:days_absent]},
+                  #{schools_hash[:total]},
+                  #{schools_hash[:percent_present]},
+                  #{schools_hash[:average_daily_attendance]},
+                  #{schools_hash[:average_daily_membership]},
                   #{schools_hash[:data_source_url]},
                   #{schools_hash[:source_as_google_spreadsheet_url]},
                   #{schools_hash[:ll_scrape_dev_name]},

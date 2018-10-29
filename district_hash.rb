@@ -6,7 +6,7 @@ def create_district_hash(file_name, year, data_source_url, source_as_google_spre
   CSV.foreach("/home/krasno_o/work/xls_test/#{file_name}") do |row|
     if index > 5
       begin
-        district_number = row[0]
+        district_number = "'#{row[0].gsub("'", "\\\\'")}'"
         district_number = "NULL" unless district_number.count("a-zA-Z1234567890") > 0
       rescue Exception => e
         district_number = "NULL"

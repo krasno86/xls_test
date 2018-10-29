@@ -17,6 +17,6 @@ def get_district_params(file_name)
     data_source_url = "'http://www.fldoe.org/core/fileparse.php/7584/urlt/ADAADMDist1516.xls'"
   end
 
-  source_as_google_spreadsheet_url = "''"
+  source_as_google_spreadsheet_url = "'https://docs.google.com/spreadsheets/d/1ofOkRFKcWv-6QqfNsLmgje45DiBl72Hf6zfbcakP3I0/edit?usp=sharing'"
   create_district_hash(file_name, year, data_source_url, source_as_google_spreadsheet_url)
 end

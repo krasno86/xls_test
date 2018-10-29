@@ -14,7 +14,7 @@ def save_districts_to_db(district_hash)
   end
 
   begin
-    client.query("INSERT INTO oleg_krasno_florida_edu_average_daily_attendance_by_district (
+    client.query("INSERT INTO oleg_krasno_florida_edu_average_daily_by_district (
                                     district_number,
                                     district_name,
                                     days_present,
