@@ -5,8 +5,6 @@ def create_s3_hash(file_name, year, data_source_url, source_as_google_spreadshee
   CSV.foreach("/home/krasno_o/work/xls_test/#{file_name}") do |row|
     if index > 4
       begin
-        p '111111111111111111111111111'
-        p row[0]
         district_number = "'#{row[0].gsub("'", "\\\\'")}'"
         district_number = "NULL" unless district_number.count("a-zA-Z1234567890") > 0
       rescue Exception => e
@@ -35,15 +33,13 @@ def create_s3_hash(file_name, year, data_source_url, source_as_google_spreadshee
       end
 
       begin
-        p '444444444444444444444444444444444444'
-        p row[4]
         course_enrollment = row[4]
-        course_enrollment = "NULL" unless course_enrollments.count("a-zA-Z1234567890") > 0
+        course_enrollment = "NULL" unless course_enrollment.count("a-zA-Z1234567890") > 0
       rescue Exception => e
         course_enrollment = "NULL"
       end
 
-      p district_hash = {
+      district_hash = {
           'district_number': district_number,
           'district_name': district_name,
           'course_name': course_name,

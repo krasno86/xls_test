@@ -1,21 +1,21 @@
 require_relative 'school_hash'
 
-def get_school_params(file_name)
+def get_s2_params(file_name)
   case true
   when file_name.include?('1213')
     year = "'2012-13'"
-    data_source_url = "'http://www.fldoe.org/core/fileparse.php/7584/urlt/0069362-absent1213.xls'"
-  when file_name.include?('2013-14')
+  when file_name.include?('1314')
     year = "'2013-14'"
-    data_source_url = "'http://www.fldoe.org/core/fileparse.php/7584/urlt/2013-14-ABS21DAYS-School-Web.xls'"
   when file_name.include?('1415')
     year = "'2014-15'"
-    data_source_url = "'http://www.fldoe.org/core/fileparse.php/7584/urlt/1415ABS21DAYSchool.xls'"
   when file_name.include?('1516')
     year = "'2015-16'"
-    data_source_url = "'http://www.fldoe.org/core/fileparse.php/7584/urlt/1516ABS21DAYSchool.xls'"
+  when file_name.include?('1516')
+    year = "'2016-17'"
   end
 
-  source_as_google_spreadsheet_url = "'https://docs.google.com/spreadsheets/d/11zMv2wtV4_jjBh6YApmwH7yFGPPbCmr10YWky2O5i8A/edit?usp=sharing'"
-  create_school_hash(file_name, year, data_source_url, source_as_google_spreadsheet_url)
+  data_source_url = "'http://www.fldoe.org/accountability/data-sys/edu-info-accountability-services/pk-12-public-school-data-pubs-reports/archive.stml'"
+  source_as_google_spreadsheet_url = "''"
+
+  create_s2_hash(file_name, year, data_source_url, source_as_google_spreadsheet_url)
 end

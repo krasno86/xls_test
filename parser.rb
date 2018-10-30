@@ -29,11 +29,14 @@ require 'date'
 
 csv_files_names = Dir["csv_files/*"]
 
-# csv_files_names.each do |file_name|
-  # if file_name.include?('s3') || file_name.include?('16173') || file_name.include?('survey-3')
-  #   get_s3_params(file_name)
-  # else
-  #   get_school_params(file_name)
-  # end
-# end
-get_s3_params("csv_files/Course-Enrollment-1415s3.csv")
+csv_files_names.each do |file_name|
+  if file_name.include?('s3') || file_name.include?('16173') || file_name.include?('survey-3')
+    get_s3_params(file_name)
+  else
+    get_school_params(file_name)
+  end
+end
+
+# get_s3_params("csv_files/Course-Enrollment-1415s3.csv")
+# get_s2_params("csv_files/Crs-Enroll-GQMY-F70814-1314-survey-2-FINAL-Web.csv")
+
