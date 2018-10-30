@@ -26,12 +26,15 @@ require 'date'
 #   %x(ssconvert ~/work/xls_test/#{old_file_name} ~/work/xls_test/csv_files/#{new_file_name})
 # end
 
-csv_files_names = Dir["csv_files/*"]
+# csv_files_names = Dir["csv_files/*"]
+#
+# csv_files_names.each do |file_name|
+#   if file_name.include?('District') || file_name.include?('district')
+#     get_district_params(file_name)
+#   else
+#     get_school_params(file_name)
+#   end
+# end
 
-csv_files_names.each do |file_name|
-  if file_name.include?('District') || file_name.include?('district')
-    get_district_params(file_name)
-  else
-    get_school_params(file_name)
-  end
-end
+
+get_district_params('csv_files/CourseEnrollmentSt16173.csv')
