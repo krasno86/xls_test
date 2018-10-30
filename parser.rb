@@ -22,16 +22,18 @@ require 'date'
 
 # old_names_arr = Dir["xls_files/*"]
 # old_names_arr.each do |old_file_name|
+#   old_file_name
 #   new_file_name = "#{old_file_name.gsub("xls_files/", "").gsub(".xls", "")}.csv"
 #   %x(ssconvert ~/work/xls_test/#{old_file_name} ~/work/xls_test/csv_files/#{new_file_name})
 # end
 
 csv_files_names = Dir["csv_files/*"]
 
-csv_files_names.each do |file_name|
-  if file_name.include?('District') || file_name.include?('district')
-    get_district_params(file_name)
-  else
-    get_school_params(file_name)
-  end
-end
+# csv_files_names.each do |file_name|
+  # if file_name.include?('s3') || file_name.include?('16173') || file_name.include?('survey-3')
+  #   get_s3_params(file_name)
+  # else
+  #   get_school_params(file_name)
+  # end
+# end
+get_s3_params("csv_files/Course-Enrollment-1415s3.csv")
