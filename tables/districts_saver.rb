@@ -23,7 +23,7 @@ def save_district_to_db(district_hash)
                                     district_type,
                                     data_source_url,
                                     scrape_dev)
-          VALUES (#{district_hash['district_number'].to_i},
+          VALUES (#{district_hash['district_number']},
                   #{district_hash['district_name']},
                   #{district_hash['superintendent']},
                   #{district_hash['address']},

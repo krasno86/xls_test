@@ -49,25 +49,24 @@ browser = Capybara.current_session
 driver = browser.driver.browser
 browser.visit "http://webprod1.isbe.net/ILEARN/Content/SearchData"
 browser.find('#Submit').click
-doc = Nokogiri::HTML(driver.page_source)
 links = []
 
-loop do
+begin
+  loop do
+    doc = Nokogiri::HTML(driver.page_source)
+    break if !doc.css('.PagedList-skipToNext')
 
-
-  break if !doc.css('.PagedList-skipToNext')
-  doc.css('tbody tr').each do |th|
-    html = th.css('td a')[0]
-    links << 'http://webprod1.isbe.net'.concat(th.css('td a')[0]["href"]) if html
+    doc.css('tbody tr').each do |th|
+      html = th.css('td a')[0]
+      links << 'http://webprod1.isbe.net'.concat(th.css('td a')[0]["href"]) if html
+    end
+    browser.find('.PagedList-skipToNext a').click
   end
 
-  browser.find('.PagedList-skipToNext a').click
-end
-
-p links
-
-links.each do |link|
-  browser.visit link if link.length > 0
-  page = Nokogiri::HTML(driver.page_source)
-  parse_page(page)
+rescue
+  links.each do |link|
+    browser.visit link if link.length > 0
+    page = Nokogiri::HTML(driver.page_source)
+    parse_page(page)
+  end
 end

@@ -1,8 +1,9 @@
 require_relative 'tables/districts_saver'
 
 def parse_page(page)
+  district_hash = {}
   number_and_name = page.css('#DistrictInfo').text.gsub('District : ','')
-  district_hash['district_number'] = number_and_name.split[0].to_i
+  district_hash['district_number'] = number_and_name.split[0]
   district_hash['district_name'] = "'#{number_and_name.split.slice(2..-1).join(' ')}'"
   district_hash['superintendent'] = "'#{page.css('.col-md-offset-4 p')[0].text.gsub("Superintendent:", "").strip}'"
   district_hash['address'] = "'#{page.css('.col-md-offset-4 p')[1].text.gsub("Address:", "").strip}'"
