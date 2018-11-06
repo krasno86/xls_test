@@ -55,7 +55,7 @@ links = []
 # page = Nokogiri::HTML(driver.page_source)
 # p page.css('#collapseOne .table tr:nth-child(2) td:nth-child(2)')[0].text
 # p page.css('#collapseOne .table:last tr:nth-child(2) td:nth-child(2)')[0].text
-# parse_receipt(page)
+# parse_expenditures_disbursements(page)
 
 begin
   loop do
@@ -74,6 +74,7 @@ rescue
     browser.visit link if link.length > 0
     page = Nokogiri::HTML(driver.page_source)
     # parse_district(page)
-    parse_receipts_revenues(page)
+    # parse_receipts_revenues(page)
+    parse_expenditures_disbursements(page)
   end
 end

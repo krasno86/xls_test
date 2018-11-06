@@ -37,7 +37,7 @@ def save_receipt_to_db(receipt_hash)
   rescue Exception => e
     p "############################EXCEPTION_SQL_SAVE_RECEIPT#########################"
     p e
-    p district_hash
+    p receipt_hash
   end
   client.close
 end

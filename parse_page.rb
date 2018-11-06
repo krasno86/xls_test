@@ -1,5 +1,6 @@
 require_relative 'tables/districts_saver'
 require_relative 'tables/receipts_saver'
+require_relative 'tables/expenditures_disbursements_saver'
 
 def parse_district(page)
   district_hash = {}
@@ -26,14 +27,14 @@ def parse_receipts_revenues(page)
 end
 
 def parse_expenditures_disbursements(page)
-  receipt_hash = {}
+  expenditures_disbursements_hash = {}
   number_and_name = page.css('#DistrictInfo').text.gsub('District : ','')
-  receipt_hash['district_number'] = "'#{number_and_name.split[0]}'"
-  receipt_hash['district_name'] = "'#{number_and_name.split.slice(2..-1).join(' ')}'"
-  receipt_hash['instruction_amount'] = page.css('#collapseOne .table tr:nth-child(2) td:nth-child(2)')[0].text.gsub('$','').gsub(',','').strip.to_i
-  receipt_hash['general_administration_amount'] = page.css('#collapseOne .table tr:nth-child(3) td:nth-child(2)')[0].text.gsub('$','').gsub(',','').strip.to_i
-  receipt_hash['support_services_amount'] = page.css('#collapseOne .table tr:nth-child(4) td:nth-child(2)')[0].text.gsub('$','').gsub(',','').strip.to_i
-  receipt_hash['other_amount'] = page.css('#collapseOne .table tr:nth-child(5) td:nth-child(2)')[0].text.gsub('$','').gsub(',','').strip.to_i
-  receipt_hash['total_amount'] = page.css('#collapseOne .table tr:nth-child(5) td:nth-child(2)')[0].text.gsub('$','').gsub(',','').strip.to_i
-  save_receipt_to_db receipt_hash
+  expenditures_disbursements_hash['district_number'] = "'#{number_and_name.split[0]}'"
+  expenditures_disbursements_hash['district_name'] = "'#{number_and_name.split.slice(2..-1).join(' ')}'"
+  expenditures_disbursements_hash['instruction_amount'] = page.css('#collapseOne .table:last tr:nth-child(2) td:nth-child(2)')[0].text.gsub('$','').gsub(',','').strip.to_i
+  expenditures_disbursements_hash['general_administration_amount'] = page.css('#collapseOne .table:last tr:nth-child(3) td:nth-child(2)')[0].text.gsub('$','').gsub(',','').strip.to_i
+  expenditures_disbursements_hash['support_services_amount'] = page.css('#collapseOne .table:last tr:nth-child(4) td:nth-child(2)')[0].text.gsub('$','').gsub(',','').strip.to_i
+  expenditures_disbursements_hash['other_amount'] = page.css('#collapseOne .table:last tr:nth-child(5) td:nth-child(2)')[0].text.gsub('$','').gsub(',','').strip.to_i
+  expenditures_disbursements_hash['total_amount'] = page.css('#collapseOne .table:last tr:nth-child(6) td:nth-child(2)')[0].text.gsub('$','').gsub(',','').strip.to_i
+  save_expenditures_disbursements_to_db expenditures_disbursements_hash
 end
