@@ -2,6 +2,7 @@ require_relative 'tables/districts_saver'
 require_relative 'tables/receipts_saver'
 require_relative 'tables/expenditures_disbursements_saver'
 require_relative 'tables/student_info_saver'
+require_relative 'tables/tax_information'
 
 def parse_district(page)
   district_hash = {}
@@ -56,4 +57,20 @@ def parse_per_student_info(page)
   student_info_hash['statewide_PCTC_rank'] = page.css('#collapseTwo .table:nth-child(3) tr:nth-child(4) td:nth-child(2)')[0].text.gsub('$','').gsub(',','').strip.to_i
   student_info_hash['statewide_PCTC'] = page.css('#collapseTwo .table:nth-child(3) tr:nth-child(5) td:nth-child(2)')[0].text.gsub('$','').gsub(',','').strip.to_i
   save_student_info_to_db student_info_hash
+end
+
+def parse_tax_information(page)
+  tax_information_hash = {}
+  number_and_name = page.css('#DistrictInfo').text.gsub('District : ','')
+  tax_information_hash['district_number'] = "'#{number_and_name.split[0]}'"
+  tax_information_hash['district_name'] = "'#{number_and_name.split.slice(2..-1).join(' ')}'"
+  tax_information_hash['real_eav'] = page.css('#collapseThree .table tr:nth-child(2) td:nth-child(2)')[0].text.gsub(',','').strip.to_i
+  tax_information_hash['reav_per_pupil'] = page.css('#collapseThree .table tr:nth-child(3) td:nth-child(2)')[0].text.gsub(',','').strip.to_i
+  tax_information_hash['statewide_eavpp_rank'] = page.css('#collapseThree .table tr:nth-child(4) td:nth-child(2)')[0].text.strip.to_i
+  tax_information_hash['formula_type'] = "'#{page.css('#collapseThree .table tr:nth-child(5) td:nth-child(2)')[0].text}'"
+  tax_information_hash['total_tax_rate'] = page.css('#collapseThree .table:nth-child(2) tr:nth-child(2) td:nth-child(2)')[0].text.strip.to_f
+  tax_information_hash['statewide_ttr_rank'] = page.css('#collapseThree .table:nth-child(2) tr:nth-child(3) td:nth-child(2)')[0].text.strip.to_i
+  tax_information_hash['operating_tax_rate'] = page.css('#collapseThree .table:nth-child(2) tr:nth-child(4) td:nth-child(2)')[0].text.strip.to_f
+  tax_information_hash['statewide_otr_rank'] = page.css('#collapseThree .table:nth-child(2) tr:nth-child(5) td:nth-child(2)')[0].text.strip.to_i
+  save_tax_information_to_db tax_information_hash
 end

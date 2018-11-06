@@ -11,12 +11,6 @@ require 'capybara-webkit'
 require 'selenium-webdriver'
 require_relative 'parse_page'
 
-# table1 = Spreadsheet.open '/home/krasno_o/Загрузки/1516ABS21DAYSchool.xls'
-# sheet1 = table1.worksheet 0
-# sheet1.each do |row|
-#   p row
-# end
-
 # url = 'http://www.fldoe.org/core/fileparse.php/7584/urlt/1516ABS21DAYSDistrict.xls'
 # doc = Spreadsheet.open (open(url))
 # sheet1 = doc.worksheet 0
@@ -30,11 +24,6 @@ require_relative 'parse_page'
 # profile['general.useragent.override'] = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:62.0) Gecko/20100101 Firefox/62.0'
 # options = Selenium::WebDriver::Firefox::Options.new(profile: profile)
 # driver = Selenium::WebDriver.for :firefox, options: options
-#
-# driver.navigate.to "http://webprod1.isbe.net/ILEARN/Content/SearchData"
-#
-# element = driver.find_element(id: '#submit')
-# p element
 
 Capybara.register_driver :selenium do |app|
   Capybara::Selenium::Driver.new(app, browser: :firefox)
@@ -50,12 +39,6 @@ driver = browser.driver.browser
 browser.visit "http://webprod1.isbe.net/ILEARN/Content/SearchData"
 browser.find('#Submit').click
 links = []
-
-# browser.visit 'http://webprod1.isbe.net/ILEARN/Content/displayData?RCDTSeclected=01001002026&District=Liberty%20CUSD%202'
-# page = Nokogiri::HTML(driver.page_source)
-# # p page.css('#collapseTwo .table tr:nth-child(2) td:nth-child(2)')[0].text
-# # p page.css('#collapseTwo .table tr:nth-child(3) td:nth-child(2)')[0].text
-# parse_per_student_info(page)
 
 begin
   loop do
@@ -76,6 +59,7 @@ rescue
     # parse_district(page)
     # parse_receipts_revenues(page)
     # parse_expenditures_disbursements(page)
-    parse_per_student_info(page)
+    # parse_per_student_info(page)
+    parse_tax_information(page)
   end
 end
