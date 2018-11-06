@@ -51,6 +51,12 @@ browser.visit "http://webprod1.isbe.net/ILEARN/Content/SearchData"
 browser.find('#Submit').click
 links = []
 
+# browser.visit 'http://webprod1.isbe.net/ILEARN/Content/displayData?RCDTSeclected=01001002026&District=Liberty%20CUSD%202'
+# page = Nokogiri::HTML(driver.page_source)
+# p page.css('#collapseOne .table tr:nth-child(2) td:nth-child(2)')[0].text
+# p page.css('#collapseOne .table:last tr:nth-child(2) td:nth-child(2)')[0].text
+# parse_receipt(page)
+
 begin
   loop do
     doc = Nokogiri::HTML(driver.page_source)
@@ -67,6 +73,6 @@ rescue
   links.each do |link|
     browser.visit link if link.length > 0
     page = Nokogiri::HTML(driver.page_source)
-    parse_page(page)
+    parse_district(page)
   end
 end
