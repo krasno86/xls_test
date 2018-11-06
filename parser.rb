@@ -53,9 +53,9 @@ links = []
 
 # browser.visit 'http://webprod1.isbe.net/ILEARN/Content/displayData?RCDTSeclected=01001002026&District=Liberty%20CUSD%202'
 # page = Nokogiri::HTML(driver.page_source)
-# p page.css('#collapseOne .table tr:nth-child(2) td:nth-child(2)')[0].text
-# p page.css('#collapseOne .table:last tr:nth-child(2) td:nth-child(2)')[0].text
-# parse_expenditures_disbursements(page)
+# # p page.css('#collapseTwo .table tr:nth-child(2) td:nth-child(2)')[0].text
+# # p page.css('#collapseTwo .table tr:nth-child(3) td:nth-child(2)')[0].text
+# parse_per_student_info(page)
 
 begin
   loop do
@@ -75,6 +75,7 @@ rescue
     page = Nokogiri::HTML(driver.page_source)
     # parse_district(page)
     # parse_receipts_revenues(page)
-    parse_expenditures_disbursements(page)
+    # parse_expenditures_disbursements(page)
+    parse_per_student_info(page)
   end
 end
