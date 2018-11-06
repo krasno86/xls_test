@@ -14,7 +14,7 @@ def save_receipt_to_db(receipt_hash)
   end
 
   begin
-    client.query("INSERT INTO oleg_krasno_ilearn_receipts (
+    client.query("INSERT INTO oleg_krasno_ilearn_receipts_revenues (
                                     district_number,
                                     district_name,
                                     state_amount,
@@ -23,16 +23,16 @@ def save_receipt_to_db(receipt_hash)
                                     total_amount,
                                     data_source_url,
                                     scrape_dev)
-          VALUES (#{district_hash['district_number']},
-                  #{district_hash['district_name']},
-                  #{district_hash['state_amount']},
-                  #{district_hash['local_amount']},
-                  #{district_hash['federal_amount']},
-                  #{district_hash['total_amount']},
+          VALUES (#{receipt_hash['district_number']},
+                  #{receipt_hash['district_name']},
+                  #{receipt_hash['state_amount']},
+                  #{receipt_hash['local_amount']},
+                  #{receipt_hash['federal_amount']},
+                  #{receipt_hash['total_amount']},
                   'http://webprod1.isbe.net/ILEARN/Content/SearchData',
                   'Oleg Krasno');")
     p "-" * 150
-    p "SAVED_DISTRICTS"
+    p "SAVED_Receipts_Revenues"
     p "=" * 150
   rescue Exception => e
     p "############################EXCEPTION_SQL_SAVE_RECEIPT#########################"

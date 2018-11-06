@@ -73,6 +73,7 @@ rescue
   links.each do |link|
     browser.visit link if link.length > 0
     page = Nokogiri::HTML(driver.page_source)
-    parse_district(page)
+    # parse_district(page)
+    parse_receipts_revenues(page)
   end
 end
