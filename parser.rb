@@ -9,8 +9,7 @@ require 'capybara'
 require 'capybara/dsl'
 require 'capybara-webkit'
 require 'selenium-webdriver'
-require_relative 'tables/districts_saver'
-
+require_relative 'parse_page'
 
 # table1 = Spreadsheet.open '/home/krasno_o/Загрузки/1516ABS21DAYSchool.xls'
 # sheet1 = table1.worksheet 0
@@ -50,59 +49,30 @@ browser = Capybara.current_session
 driver = browser.driver.browser
 browser.visit "http://webprod1.isbe.net/ILEARN/Content/SearchData"
 browser.find('#Submit').click
+links = []
 
+# browser.visit 'http://webprod1.isbe.net/ILEARN/Content/displayData?RCDTSeclected=01001002026&District=Liberty%20CUSD%202'
+# page = Nokogiri::HTML(driver.page_source)
+# p page.css('#collapseOne .table tr:nth-child(2) td:nth-child(2)')[0].text
+# p page.css('#collapseOne .table:last tr:nth-child(2) td:nth-child(2)')[0].text
+# parse_receipt(page)
 
+begin
+  loop do
+    doc = Nokogiri::HTML(driver.page_source)
+    break if !doc.css('.PagedList-skipToNext')
 
-
-doc = Nokogiri::HTML(driver.page_source)
-index = 0
-array = []
-
-
-doc.css('tbody tr').each do |th|
-  break if !doc.css('.PagedList-skipToNext')
-    if index > 0
-
-    district_hash = {}
-    # district_hash.id = th.css('td').first.text.to_i
-    # district_hash.name = th.css('td')[1].text.to_s.gsub("\n",'').strip
-
-    link = 'http://webprod1.isbe.net'.concat(th.css('td a')[0]["href"])
-    browser.visit link
-    page = Nokogiri::HTML(driver.page_source)
-    number_and_name = page.css('#DistrictInfo').text.gsub('District : ','')
-    district_hash['district_number'] = number_and_name.split[0].to_i
-    district_hash['district_name'] = "'#{number_and_name.split.slice(2..-1).join(' ')}'"
-    district_hash['superintendent'] = "'#{page.css('.col-md-offset-4 p')[0].text.gsub("Superintendent:", "").strip}'"
-    district_hash['address'] = "'#{page.css('.col-md-offset-4 p')[1].text.gsub("Address:", "").strip}'"
-    district_hash['phone'] = "'#{page.css('.col-md-offset-4 p')[2].text.gsub("Phone:", "").strip}'"
-    district_hash['district_type'] = "'#{page.css('.col-md-offset-4 p')[3].text.gsub("\n","").gsub("District Type:", "").strip}'"
-    save_district_to_db district_hash
+    doc.css('tbody tr').each do |th|
+      html = th.css('td a')[0]
+      links << 'http://webprod1.isbe.net'.concat(th.css('td a')[0]["href"]) if html
     end
-  
-  index += 1
+    browser.find('.PagedList-skipToNext a').click
+  end
+
+rescue
+  links.each do |link|
+    browser.visit link if link.length > 0
+    page = Nokogiri::HTML(driver.page_source)
+    parse_district(page)
+  end
 end
-
-browser.visit "http://webprod1.isbe.net/ILEARN/Content/SearchData"
-browser.find('.PagedList-skipToNext a').click
-
-
-# browser.visit "http://webprod1.isbe.net/ILEARN/Content/displayData?RCDTSeclected=01001001026&District=Payson%20CUSD%201"
-# doc = Nokogiri::HTML(driver.page_source)
-# p superintendent = doc.css('.col-md-offset-4 p')[0].text.gsub("Superintendent:", "").strip
-# p address = doc.css('.col-md-offset-4 p')[1].text.gsub("Superintendent:", "").strip
-# p phone = doc.css('.col-md-offset-4 p')[2].text.gsub("Phone:", "").strip
-# p district_type = doc.css('.col-md-offset-4 p')[3].text.gsub("\n",'').gsub("District Type:", "").strip
-
-
-
-
-# doc.css('.col-md-offset-4').each do |f|
-#   p '----------------------'
-#   p f.text
-# end
-
-# browser.find('table tbody tr:nth-child(2) a').click
-# sleep(2)
-# doc = Nokogiri::HTML(driver.page_source)
-# p doc.css('#DistrictInfo').text
